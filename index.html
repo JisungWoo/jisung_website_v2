@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jisung Woo - Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      scroll-behavior: smooth;
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+    .profile-img {
+      width: 400px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .profile-img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .edu-img {
+      width: 50%;
+      border-radius: 10px;
+      object-fit: cover;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .edu-img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .section {
+      padding: 80px 0;
+    }
+    .btn-green {
+      background-color: #32cd32;
+      color: white;
+      font-weight: bold;
+    }
+    .companies {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .companies img {
+      height: 60px;
+      object-fit: contain;
+    }
+    .bg-light-section {
+      background-color: #ffffff;
+    }
+    .bg-dark-section {
+      background-color: #111111;
+      color: #ffffff;
+    }
+    .edu-case {
+      margin-bottom: 80px;
+    }
+    .badge-style {
+      display: inline-block;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 50px;
+      background-color: #0d6efd;
+      color: white;
+    }
+    .worked-at-label {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #333;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .skill-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 25px;
+      margin-bottom: 30px;
+      max-height: 320px;
+      overflow-y: auto;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1rem;
+    }
+    .skill-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .skill-card h5 {
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .skill-card ul {
+      padding-left: 1rem;
+      list-style: disc;
+      text-align: left;
+      margin-bottom: 0;
+    }
+    .skill-card ul li {
+      margin-bottom: 8px;
+    }
+    #education {
+      background-image: url('Files/ASU.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 90%; /* 1.5x larger */
+      background-attachment: scroll; /* now the logo stays in place relative to the section */
+      position: relative;
+    }
+
+    #education::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(17, 17, 17, 0.85); /* dim effect */
+      z-index: 1;
+    }
+
+    #education .container {
+      position: relative;
+      z-index: 2;
+    }
+
+
+
+    @media (max-width: 768px) {
+      .profile-img {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto 30px auto;
+        display: block;
+      }
+      .companies {
+        justify-content: space-around !important;
+        gap: 30px;
+      }
+    }
+    .hover-zoom {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-zoom:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    .modal-content {
+      background-color: #1e1e1e;
+      border: none;
+    }
+    .modal-backdrop.show {
+      opacity: 0.85;
+      background: rgba(0, 0, 0, 0.9);
+    }
+    .modal-header .btn-close {
+      filter: invert(1);
+    }
+    #experience ul li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+
+
+    .timeline {
+      position: relative;
+      margin-left: 30px;
+      border-left: 3px solid rgba(255, 255, 255, 0.2);
+      padding-left: 30px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 50px;
+      padding-left: 20px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: -38px;
+      width: 20px;
+      height: 20px;
+      background-color: #0d6efd;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .timeline-content {
+      background-color: #1c1c1c;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      color: #f1f1f1;
+    }
+
+    .timeline-content h5 {
+      color: #ffffff;
+    }
+
+    .timeline-content p {
+      color: #cccccc;
+      margin-bottom: 8px;
+    }
+
+    .timeline-content ul {
+      color: #dddddd;
+      padding-left: 1.2rem;
+    }
+
+    .timeline-content ul li::marker {
+      color: #0d6efd;
+    }
+    #experience .timeline-content p.text-muted {
+      color: #a0a0a0 !important;
+      font-style: italic;
+    }
+
+    #experience .timeline-content h5 {
+      color: #ffffff !important;
+      font-weight: 700;
+    }
+
+
+
+  </style>
+</head>
+<body>
+
+  
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="#">Jisung Woo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#about">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+        <!-- Language Switch Button -->
+        <li class="nav-item ms-3">
+          <a class="btn btn-outline-dark btn-sm d-flex align-items-center gap-1 px-3 py-1 rounded-pill" 
+             href="index_kr.html" title="View in Korean">
+            <span style="font-size: 1.1rem;">A</span>
+            <span style="font-size: 1rem;">|</span>
+            <span style="font-size: 1.1rem;">가</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+  <!-- Introduction Section -->
+  <section id="about" class="section bg-light-section">
+    <div class="container">
+      <div class="row align-items-center flex-column-reverse flex-md-row">
+        <div class="col-md-6 text-md-start text-center">
+          <h1 class="display-4 fw-bold">Hi, I am Jisung Woo and I am a Data Engineer</h1>
+  <p class="lead">
+    My name is Jisung Woo, and I’m a self-driven Data Engineer with deep expertise in IT systems and enterprise data integration. I specialize in building end-to-end ETL pipelines using Snowflake, Control-M, Informatica, SSIS, SQL Server, and Azure Data Factory, with a strong focus on automation, data modeling, warehousing, and dashboard optimization through Power BI.
+  </p>
+  <p class="lead">
+    My approach starts with understanding the business context behind the data. I believe effective data engineering begins with knowing what the data truly represents — not just how it's stored. This mindset enables me to solve problems efficiently and build solutions that align with real business needs.
+  </p>
+  <p class="lead">
+    I’m known for my structured, detail-oriented workflow. I maintain clear documentation and visual references for every project I touch — making collaboration seamless and keeping stakeholders fully informed at every stage.
+  </p>
+  <p class="lead">
+    Feel free to explore my portfolio to see how I apply these principles across real-world projects — and don’t hesitate to reach out if you're looking for a results-oriented engineer who combines technical precision with thoughtful communication.
+  </p>
+          <a href="Files/JisungWoo_Resume.pdf" download class="btn btn-success mt-3">Download My Resume &gt;</a>
+        </div>
+        <div class="col-md-6 text-center">
+          <img src="Files/Profile_Pic_Graduation.jpg" alt="Jisung Woo" class="profile-img">
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-12">
+          <p class="worked-at-label">Worked at:</p>
+          <div class="companies">
+            <img src="Files/Honeywell.png" alt="Honeywell Inc.">
+            <img src="Files/ASUEP.png" alt="ASU Enterprise Partners">
+            <img src="Files/Oracle_Cerner.png" alt="Oracle - Cerner">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Education Section -->
+  <section id="education" class="section bg-dark-section">
+    <div class="container">
+      <h2 class="text-center mb-5">🎓 Education</h2>
+
+      <!-- Master's Degree -->
+      <div class="row align-items-center edu-case">
+        <div class="col-md-6 text-center">
+          <a href="Files/2024_MS-BA Diploma.pdf" target="_blank">
+            <img src="Files/2024_MS-BA_diploma.png" class="edu-img hover-zoom" alt="Master's Degree Diploma">
+          </a>
+        </div>
+        <div class="col-md-6">
+          <span class="badge-style mb-2">Master's</span>
+          <h4 class="text-white">Master of Science – Business Analytics</h4>
+          <p>W. P. Carey School of Business, Arizona State University (2023–2024)<br>
+          Graduated with Distinction<br>
+          GPA: 4.0</p>
+          <a href="Files/2024_MS-BA Diploma.pdf" target="_blank" class="btn btn-primary mt-3">View my diploma</a>
+        </div>
+      </div>
+
+      <!-- Bachelor's Degree -->
+      <div class="row align-items-center edu-case">
+        <div class="col-md-6 text-center">
+          <a href="Files/2020_CIS_Diploma.pdf" target="_blank">
+            <img src="Files/2020_CIS_diploma.png" class="edu-img hover-zoom" alt="Bachelor's Degree Diploma">
+          </a>
+        </div>
+        <div class="col-md-6">
+          <span class="badge-style mb-2" style="background-color: #20c997;">Bachelor's</span>
+          <h4 class="text-white">Bachelor of Science – Computer Information Systems</h4>
+          <p>W. P. Carey School of Business, Arizona State University (2016–2020)<br>
+          GPA: 2.73</p>
+          <a href="Files/2020_CIS_Diploma.pdf" target="_blank" class="btn btn-success mt-3">View my diploma</a>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center pt-3">
+        <p class="text-white fs-5 fw-semibold">Curious how I went from a GPA of 2.73 to a 4.0?</p>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#contactModal">Learn more</button>
+      </div>
+    </div> <!-- 🛠️ This is the missing container close -->
+  </section>
+
+  <!-- Phone Modal -->
+  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center bg-dark text-white rounded-4 shadow-lg p-4">
+        <div class="modal-header border-0">
+          <h5 class="modal-title mx-auto" id="contactModalLabel">Let's connect and talk! ✉️</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="fs-5">To learn more about me, you can email me at:</p>
+          <h4 class="fw-bold text-light">jisungwoo9@gmail.com</h4>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Skills Section -->
+  <section id="skills" class="section bg-light-section">
+    <div class="container">
+      <h2 class="text-center mb-5">🛠️ Skills</h2>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="skill-card">
+            <h5>Programming Languages</h5>
+            <ul>
+              <li>SQL</li>
+              <li>Python</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>Java</li>
+              <li>MATLAB</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="skill-card">
+            <h5>Tools & Platforms</h5>
+            <ul>
+              <li>Snowflake</li>
+              <li>Control-M</li>
+              <li>Informatica</li>
+              <li>SQL Server</li>
+              <li>SSIS</li>
+              <li>Salesforce</li>
+              <li>ADF</li>
+              <li>Power BI</li>
+              <li>MySQL</li>
+              <li>Azure</li>
+              <li>GitHub</li>
+              <li>React</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="skill-card">
+            <h5>Technical Expertise</h5>
+            <ul>
+              <li>Data Automation</li>
+              <li>ETL/ELT</li>
+              <li>Warehousing</li>
+              <li>Data Modeling</li>
+              <li>Visualization</li>
+              <li>CI/CD Pipeline Integration</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="skill-card">
+            <h5>Languages</h5>
+            <ul>
+              <li>English (Advanced Proficiency)</li>
+              <li>Korean (Advanced Proficiency)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section bg-dark-section">
+    <div class="container">
+      <h2 class="text-center mb-5">💼 Experience</h2>
+      <div class="timeline">
+
+        <!-- Honeywell -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h5 class="fw-bold mb-1">Data Engineer II</h5>
+            <p class="mb-1 text-muted">Honeywell · Phoenix, AZ</p>
+            <p class="text-muted">August 2024 – Present</p>
+          </div>
+        </div>
+
+        <!-- ASU EP -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h5 class="fw-bold mb-1">Data Engineer I</h5>
+            <p class="mb-1 text-muted">ASU Enterprise Partners · Tempe, AZ</p>
+            <p class="text-muted">March 2022 – July 2024</p>
+            <ul class="text-start mt-2">
+              <li>Automated data loading workflows using SSIS and Azure Data Factory, eliminating manual data loading and human error by establishing secure integration with Azure Blob Storage.</li>
+              <li>Led successful migration of legacy SSIS jobs and SQL stored procedures to Azure Data Factory, modernizing pipeline architecture.</li>
+              <li>Designed and deployed data deduplication routines to ensure consistency and quality across enterprise systems.</li>
+              <li>Built and managed SQL Server stored procedures that automated Power BI refreshes, reducing reliance on complex DAX and improving report performance.</li>
+              <li>Engineered and optimized ETL/ELT pipelines that integrated SQL Server, Salesforce, Workday, and Azure Blob Storage into the enterprise data warehouse.</li>
+              <li>Transformed raw datasets into reporting-ready models, improving business insights and enabling robust dashboarding.</li>
+              <li>Developed reusable SSIS components for efficient job scheduling and consistent metadata management.</li>
+              <li>Supported analytics through advanced data modeling and staging processes in SQL Server and Azure environments.</li>
+              <li>Maintained scalable data integrations between systems, ensuring accuracy and synchronization across platforms.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Oracle Cerner -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h5 class="fw-bold mb-1">Technical Solution Analyst</h5>
+            <p class="mb-1 text-muted">Oracle - Cerner Corporation · Kansas City, MO</p>
+            <p class="text-muted">Feb 2021 – Mar 2022</p>
+            <ul class="text-start mt-2">
+              <li>Investigated and resolved complex front-end and backend data issues across enterprise applications using SQL, log analysis, and proactive Oracle-based monitoring—maintaining 90%+ client satisfaction while meeting SLAs.</li>
+              <li>Collaborated cross-functionally to troubleshoot data integrity problems, perform safe SQL updates, and stabilize data flows across systems and teams.</li>
+              <li>Led investigations for Oracle-based Order Management applications with SQL, application logs, and end-user shadowing.</li>
+              <li>Identified bad data in remote databases using Oracle SQL-based validations and monitoring scripts.</li>
+              <li>Analyzed Oracle query execution plans and system logs to fix broken pipelines and optimize transactions.</li>
+              <li>Acted as a liaison between engineering teams and clients, translating technical findings into actionable resolutions.</li>
+              <li>Supported high-volume issue queues (90–110 monthly tickets) and provided critical 24/7 on-call support for healthcare systems.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Projects Section -->
+  <section id="projects" class="section bg-light-section">
+    <div class="container">
+      <h2 class="text-center mb-5">🚀 Featured Projects</h2>
+
+      <div class="row g-5">
+
+        <!-- Project 1: React Portfolio -->
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm h-100 hover-zoom">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">🌐 React & ChatGPT Personal Portfolio</h5>
+              <p class="text-muted fst-italic">July 2024 – Present · Independent Project</p>
+              <ul class="mb-3">
+                <li>Developed a responsive personal portfolio using <strong>React</strong>, styled with custom HTML, CSS, and Bootstrap.</li>
+                <li>Incorporated AI-driven editing with <strong>ChatGPT</strong> for content refinement and layout adjustments.</li>
+                <li>Published and deployed two versions of the site using GitHub Pages for live access and iteration testing.</li>
+              </ul>
+
+              <!-- Live Link Section with Two Versions -->
+              <div class="border rounded p-3 bg-dark-subtle text-center">
+                <p class="mb-2 fw-semibold text-dark">✨ View Live Portfolios:</p>
+                <div class="d-flex flex-column gap-2">
+                  <a href="https://jisungwoo.github.io/jisung_website/" 
+                    target="_blank" 
+                    class="btn btn-dark px-4 py-2 shadow-sm">
+                    🌐 Version 1 – jisungwoo.github.io/jisung_website/
+                  </a>
+                  <a href="https://jisungwoo.github.io/jisung_website_v2/" 
+                    target="_blank" 
+                    class="btn btn-dark px-4 py-2 shadow-sm">
+                    🌐 Version 2 – jisungwoo.github.io/jisung_website_v2/
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: MSBA Capstone -->
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm h-100 hover-zoom">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">🎾 MS-BA Capstone – Tennis Performance Analytics</h5>
+              <p class="text-muted fst-italic">June 2024 – Dec 2024 · Tempe, AZ</p>
+              <ul class="mb-3">
+                <li>Engineered a full-stack ML pipeline for extracting player insights from match videos using <strong>YOLOv8</strong> and <strong>OpenCV</strong>.</li>
+                <li>Tracked ball speed and racket movement, automating CSV-based output with Python and Jupyter.</li>
+                <li>Reduced analysis time of 20,000+ matches by 90% with optimized video trimming and AI-assisted detection.</li>
+              </ul>
+              <div class="bg-primary bg-opacity-10 border-start border-primary border-4 rounded p-3 text-center">
+                <p class="fw-semibold mb-2 text-primary">📥 Download the full slide deck:</p>
+                <a href="Files/Performance Analytics - Tennis Video Analysis (2024 Capstone).pptx" download class="btn btn-primary btn-sm px-4 shadow-sm">
+                  📊 Download Capstone Presentation
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ASU KSA Website Project -->
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm h-100 hover-zoom">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">🌐 ASU KSA Website Development</h5>
+              <p class="text-muted fst-italic">Sep 2020 – Mar 2021 · Arizona State University Korean Student Association</p>
+              <ul class="mb-3">
+                <li>Co-led a team of 7 to design and launch a custom website for ASU’s Korean Student Association.</li>
+                <li>Forecasted workload and assigned responsibilities based on projected development milestones and deadlines.</li>
+                <li>Led front-end development using HTML, CSS, and JavaScript, ensuring a responsive and accessible UI.</li>
+                <li>Mentored team members in GitHub version control and modern web technologies for sustainable site updates.</li>
+              </ul>
+              <div class="border rounded p-2 bg-light text-center">
+                <a href="https://github.com/JisungWoo/ksa_website" 
+                  target="_blank" 
+                  class="btn btn-outline-dark btn-sm px-4 shadow-sm">
+                  🔗 View Source on GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- PayPal Hackathon Project -->
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm h-100 hover-zoom">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">🏆 PayPal Opportunity Hackathon – 1st Place</h5>
+              <p class="text-muted fst-italic">October 2016 · Tempe, AZ</p>
+              <ul class="mb-3">
+                <li>Collaborated in a 3-person team to create a web-based donor communication tool for local nonprofit Matthew’s Crossing.</li>
+                <li>Developed a custom HTML interface and automated email sender using HTML, CSS, and JavaScript.</li>
+                <li>Reduced manual communication time for staff and improved donor engagement through streamlined workflows.</li>
+                <li>Secured 1st place for presenting a fully functional and impactful solution at the PayPal Opportunity Hackathon.</li>
+              </ul>
+              <div class="border rounded p-2 bg-light text-center">
+                <a href="https://devpost.com/software/matthews-crossing-data-manager" 
+                  target="_blank" 
+                  class="btn btn-outline-secondary btn-sm px-4 shadow-sm">
+                  🔗 View Project on Devpost
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section bg-dark text-white">
+    <div class="container text-center">
+      <h2 class="mb-4">📬 Contact Me</h2>
+      <p class="lead mb-3">Feel free to reach out or connect below!</p>
+
+      <!-- Email Copy Box -->
+      <div class="d-inline-flex align-items-center gap-2 bg-light rounded-pill px-3 py-2">
+        <span id="emailText" class="text-dark fw-semibold">jisungwoo9@gmail.com</span>
+        <button class="btn btn-sm btn-outline-dark rounded-pill d-flex align-items-center gap-1" onclick="copyEmail()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+            <path d="M10 1.5v1h3a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5h3v-1a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5zM9.5 1a.5.5 0 0 0-.5.5v1h-2v-1a.5.5 0 0 0-1 0v1H3v11h10v-11h-3v-1a.5.5 0 0 0-.5-.5z"/>
+          </svg>
+          Copy
+        </button>
+      </div>
+
+      <!-- Copy Success Message -->
+      <div id="copyMsg" class="text-success mt-2 d-none fw-semibold">📋 Email copied!</div>
+
+      <!-- Social Links -->
+      <div class="mt-4 d-flex justify-content-center gap-4">
+        <a href="https://www.linkedin.com/in/jisung-woo/" target="_blank" class="text-white" style="font-size: 2rem;">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="https://github.com/JisungWoo" target="_blank" class="text-white" style="font-size: 2rem;">
+          <i class="bi bi-github"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <script>
+    function copyEmail() {
+      const email = document.getElementById('emailText').innerText;
+      navigator.clipboard.writeText(email).then(() => {
+        const msg = document.getElementById('copyMsg');
+        msg.classList.remove('d-none');
+        setTimeout(() => msg.classList.add('d-none'), 2000);
+      });
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-light text-muted">
+    <small>&copy; 2025 Jisung Woo. All rights reserved.</small>
+  </footer>
+
+
+  
+
+
+
+</body>
+</html>
